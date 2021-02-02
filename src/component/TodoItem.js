@@ -9,9 +9,11 @@ class TodoItem extends React.Component{
     }
     render() {
         return(
-            <div>
-
-            </div>
+            <li className="todo-item">
+                <input type="checkbox" />
+                {this.props.todo.title}
+            </li>
         )
     }
 }
+export default TodoItem;

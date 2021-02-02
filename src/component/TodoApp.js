@@ -29,7 +29,7 @@ class TodoApp extends React.Component{
 
     render() {
         return (
-            <div className="container">
+            <div className="container1">
                 <Header/>
                 <Todos todos={this.state.todos}/>
             </div>
