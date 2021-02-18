@@ -13,7 +13,7 @@ class Todos extends React.Component{
                 <ul>
                     {
                         this.props.todos.map(todo=>
-                            <TodoItem key={todo.id} todo={todo} handleChange = {this.props.handleChange}/>
+                            <TodoItem key={todo.id} todo={todo} handleChange = {this.props.handleChange} deletedTodo = {this.props.deletedTodo}/>
                         )
                     }
                 </ul>

@@ -43,12 +43,20 @@ class TodoApp extends React.Component {
             })
         })
     };
-
+    deletedTodo = id => {
+        this.setState({
+            todos: [
+                ...this.state.todos.filter(todo => {
+                    return todo.id !== id;
+                })
+            ]
+        });
+    }
     render() {
         return (
             <div className="container1">
                 <Header/>
-                <Todos todos={this.state.todos} handleChange={this.handleCheckboxChange}/>
+                <Todos todos={this.state.todos} handleChange={this.handleCheckboxChange} deletedTodo={this.deletedTodo}/>
             </div>
         );
     }
