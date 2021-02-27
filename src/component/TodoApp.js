@@ -2,6 +2,7 @@ import React from 'react';
 import Header from "./layout/Header";
 import Todos from "./Todos";
 import AddTodo from "./AddTodo";
+import SearchTodo from "./SearchTodo";
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -24,7 +25,6 @@ class TodoApp extends React.Component {
                     completed: false
                 }
             ]
-
         }
     }
 
@@ -34,7 +34,7 @@ class TodoApp extends React.Component {
         numbers.map(element => element * element);
         console.log("ID: ", id);
         this.setState({
-            todos: this.state.todos.map((todo,index) => {
+            todos: this.state.todos.map((todo, index) => {
                 if (todo.id === id) {
                     todo.completed = !todo.completed;
                 }
@@ -55,12 +55,49 @@ class TodoApp extends React.Component {
         console.log(title);
     };
 
+    componentDidMount() {
+        this.setState({
+            todosSearch : this.state.todos
+        })
+    }
+
+    /*searchTodoItem = e => {
+        let listTodo = [];
+        let listTodoSearch = []
+        listTodo = this.state.todosSearch;
+        for(let x in listTodo){
+            if(listTodo[x].title.toUpperCase().includes(e.target.value.toUpperCase())){
+                listTodoSearch.push(listTodo[x])
+            }
+        }
+        this.setState({
+            todos:listTodoSearch
+        })
+    }*/
+
+    searchTodo=(e)=>{
+        let listTodo = [];
+        let listTodoSearch = []
+        listTodo = this.state.todosSearch;
+        for(let x in listTodo){
+            if(listTodo[x].title.toUpperCase().includes(e.target.value.toUpperCase())){
+                listTodoSearch.push(listTodo[x])
+            }
+        }
+        this.setState({
+            todos:listTodoSearch
+        })
+    }
+
     render() {
         return (
             <div className="container1">
                 <Header/>
-                <AddTodo addTodo = {this.addTodo}/>
-                <Todos todos={this.state.todos} handleChange={this.handleCheckboxChange} deletedTodo={this.deletedTodo}/>
+                {/*<input placeholder="search todo item..." title="text" onChange={this.searchTodoItem}/>*/}
+                <SearchTodo searchTodo={this.searchTodo}/>
+                <AddTodo addTodo={this.addTodo}/>
+                <Todos todos={this.state.todos} handleChange={this.handleCheckboxChange}
+                       deletedTodo={this.deletedTodo}/>
             </div>
         );
     }
