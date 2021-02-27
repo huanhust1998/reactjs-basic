@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "./layout/Header";
 import Todos from "./Todos";
+import AddTodo from "./AddTodo";
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -31,14 +32,12 @@ class TodoApp extends React.Component {
         let numbers = [5, 4, 3, 2, 1]
 
         numbers.map(element => element * element);
-        console.log(numbers.map(element => element * element));
-
+        console.log("ID: ", id);
         this.setState({
             todos: this.state.todos.map((todo,index) => {
                 if (todo.id === id) {
                     todo.completed = !todo.completed;
                 }
-                console.log("TODO: "+index, todo)
                 return todo;
             })
         })
@@ -52,10 +51,15 @@ class TodoApp extends React.Component {
             ]
         });
     }
+    addTodo = title => {
+        console.log(title);
+    };
+
     render() {
         return (
             <div className="container1">
                 <Header/>
+                <AddTodo addTodo = {this.addTodo}/>
                 <Todos todos={this.state.todos} handleChange={this.handleCheckboxChange} deletedTodo={this.deletedTodo}/>
             </div>
         );
