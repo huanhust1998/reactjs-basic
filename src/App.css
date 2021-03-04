@@ -114,6 +114,14 @@ body {
     width: 20%;
     outline: none;
 }
+.todo-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
+    height: 18px;
+    display: inline-block;
+}
 
 @keyframes App-logo-spin {
     from {

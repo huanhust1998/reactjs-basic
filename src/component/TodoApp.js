@@ -3,6 +3,7 @@ import Header from "./layout/Header";
 import Todos from "./Todos";
 import AddTodo from "./AddTodo";
 import SearchTodo from "./SearchTodo";
+import axios from "axios";
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -56,10 +57,18 @@ class TodoApp extends React.Component {
     };
 
     componentDidMount() {
-        this.setState({
-            todosSearch : this.state.todos
-        })
+        const config = {
+            params: {
+                _limit: 5
+            }
+        }
+        //tạo GET request để lấy danh sách todos
+        axios.get("https://jsonplaceholder.typicode.com/todos", config)
+            .then(response => this.setState({
+                todos: response.data
+            }));
     }
+
 
     /*searchTodoItem = e => {
         let listTodo = [];
@@ -75,17 +84,17 @@ class TodoApp extends React.Component {
         })
     }*/
 
-    searchTodo=(e)=>{
+    searchTodo = (e) => {
         let listTodo = [];
         let listTodoSearch = []
         listTodo = this.state.todosSearch;
-        for(let x in listTodo){
-            if(listTodo[x].title.toUpperCase().includes(e.target.value.toUpperCase())){
+        for (let x in listTodo) {
+            if (listTodo[x].title.toUpperCase().includes(e.target.value.toUpperCase())) {
                 listTodoSearch.push(listTodo[x])
             }
         }
         this.setState({
-            todos:listTodoSearch
+            todos: listTodoSearch
         })
     }
 
