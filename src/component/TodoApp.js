@@ -132,7 +132,7 @@ import Header from "./layout/Header";
 import AddTodo from "./AddTodo";
 import Todos from "./Todos";
 import axios from "axios";
-import Footer from "./layout/Footer";
+import Footer from "./store/containers/Footer";
 
 function TodoApp() {
 
