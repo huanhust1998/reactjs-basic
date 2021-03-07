@@ -2,15 +2,17 @@ import {saveTheme} from "../actions/changeThemeAction";
 import {connect} from 'react-redux';
 import Footer from "../../layout/Footer";
 
-const mapDispatchToProps = dispatch =>({
+const mapDispatchToProps = dispatch => ({
     dispatch,
-    saveColorTheme:color=>dispatch(saveTheme(color)),
+    saveColorTheme: color => dispatch(saveTheme(color)),
 })
-function mapStateToProps(state){
-    return{
-        themeColor:state.color
+
+function mapStateToProps(state) {
+    return {
+        themeColor: state.color
     }
 }
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
