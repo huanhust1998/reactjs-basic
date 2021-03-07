@@ -29,7 +29,7 @@
 }
 
 .header-container {
-    background-color: #678c89;
+    background-color: var(--main-color);
     color: #fff;
     padding: 10px 15px;
 }
@@ -54,15 +54,16 @@ body {
 }
 
 .container1 {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
-    border: 1px solid #678c89;
+    border: 1px solid var(--main-color);
 }
+
 
 .todo-item {
     list-style-type: none;
     padding: 10px 15px;
-    border-top: 1px solid #678c89;
+    border-top: 1px solid var(--main-color);
 }
 
 .todo-item input {
@@ -74,6 +75,7 @@ body {
     color: #c5e2d2;
     text-decoration: line-through
 }
+
 .btn-style {
     background: #d35e0f;
     color: #fff;
@@ -84,10 +86,12 @@ body {
     float: right;
     outline: none;
 }
+
 .form-container {
     display: flex;
     width: 100%;
 }
+
 .input-text {
     flex: 8;
     font-size: 14px;
@@ -99,10 +103,12 @@ body {
     font-weight: 400;
     width: 80%;
 }
+
 .input-text::placeholder {
     color: #fff;
     opacity: 0.8;
 }
+
 .input-submit {
     flex: 2;
     border: none;
@@ -114,6 +120,7 @@ body {
     width: 20%;
     outline: none;
 }
+
 .todo-item span {
     white-space: nowrap;
     overflow: hidden;
@@ -122,6 +129,47 @@ body {
     height: 18px;
     display: inline-block;
 }
+
+.footer {
+    height: 50px;
+    background: var(--main-color);
+    color: white;
+    position: relative;
+}
+
+.vertical-center {
+    margin: 0 0 0 10px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.red {
+    background-color: #ff0000;
+}
+
+.blue {
+    background-color: #0000ff;
+}
+
+.gray {
+    background-color: #678c89;
+}
+
+:root {
+    --main-color: #678c89;
+}
+
 
 @keyframes App-logo-spin {
     from {

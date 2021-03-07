@@ -132,6 +132,7 @@ import Header from "./layout/Header";
 import AddTodo from "./AddTodo";
 import Todos from "./Todos";
 import axios from "axios";
+import Footer from "./layout/Footer";
 
 function TodoApp() {
 
@@ -183,9 +184,9 @@ function TodoApp() {
             }
         }
         axios.get("https://jsonplaceholder.typicode.com/todos", config)
-            .then(response => setState({ todos: response.data }));
+            .then(response => setState({todos: response.data}));
 
-    },[]);
+    }, []);
 
     return (
         <div>
@@ -194,7 +195,9 @@ function TodoApp() {
             <Todos todos={state.todos}
                    handleChange={handleCheckboxChange}
                    deleteTodo={deleteTodo}/>
+            <Footer/>
         </div>
     )
 }
+
 export default TodoApp;
