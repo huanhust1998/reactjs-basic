@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import Header from "./layout/Header";
 import Todos from "./Todos";
@@ -44,16 +45,29 @@ class TodoApp extends React.Component {
         })
     };
     deletedTodo = id => {
-        this.setState({
-            todos: [
-                ...this.state.todos.filter(todo => {
-                    return todo.id !== id;
-                })
-            ]
-        });
+        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+            .then(reponse => this.setState({
+                todos: [
+                    ...this.state.todos.filter(todo => {
+                        return todo.id !== id;
+                    })
+                ]
+            }))
+
     }
     addTodo = title => {
-        console.log(title);
+        const todoData = {
+            title: title,
+            completed: false
+        }
+        axios.post("https://jsonplaceholder.typicode.com/todos", todoData)
+            .then(response => {
+                console.log(response.data)
+                this.setState({
+                    todos: [...this.state.todos, response.data]
+                })
+            });
+
     };
 
     componentDidMount() {
@@ -70,7 +84,7 @@ class TodoApp extends React.Component {
     }
 
 
-    /*searchTodoItem = e => {
+    /!*searchTodoItem = e => {
         let listTodo = [];
         let listTodoSearch = []
         listTodo = this.state.todosSearch;
@@ -82,7 +96,7 @@ class TodoApp extends React.Component {
         this.setState({
             todos:listTodoSearch
         })
-    }*/
+    }*!/
 
     searchTodo = (e) => {
         let listTodo = [];
@@ -102,7 +116,7 @@ class TodoApp extends React.Component {
         return (
             <div className="container1">
                 <Header/>
-                {/*<input placeholder="search todo item..." title="text" onChange={this.searchTodoItem}/>*/}
+                {/!*<input placeholder="search todo item..." title="text" onChange={this.searchTodoItem}/>*!/}
                 <SearchTodo searchTodo={this.searchTodo}/>
                 <AddTodo addTodo={this.addTodo}/>
                 <Todos todos={this.state.todos} handleChange={this.handleCheckboxChange}
@@ -112,4 +126,75 @@ class TodoApp extends React.Component {
     }
 }
 
+export default TodoApp;*/
+import React, {useState, useEffect} from "react";
+import Header from "./layout/Header";
+import AddTodo from "./AddTodo";
+import Todos from "./Todos";
+import axios from "axios";
+
+function TodoApp() {
+
+    const [state, setState] = useState({
+        todos: []
+    })
+
+    const handleCheckboxChange = id => {
+        setState({
+            todos: state.todos.map(todo => {
+                if (todo.id === id) {
+                    todo.completed = !todo.completed;
+                }
+                return todo;
+            })
+        })
+    }
+
+    const deleteTodo = id => {
+        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+            .then(response => setState({
+                todos: [
+                    ...state.todos.filter(todo => {
+                        return todo.id !== id;
+                    })
+                ]
+            }))
+
+    }
+
+    const addTodo = title => {
+        const todoData = {
+            title: title,
+            completed: false
+        }
+        axios.post("https://jsonplaceholder.typicode.com/todos", todoData)
+            .then(response => {
+                console.log(response.data)
+                setState({
+                    todos: [...state.todos, response.data]
+                })
+            });
+    }
+
+    useEffect(() => {
+        const config = {
+            params: {
+                _limit: 5
+            }
+        }
+        axios.get("https://jsonplaceholder.typicode.com/todos", config)
+            .then(response => setState({ todos: response.data }));
+
+    },[]);
+
+    return (
+        <div>
+            <Header/>
+            <AddTodo addTodo={addTodo}/>
+            <Todos todos={state.todos}
+                   handleChange={handleCheckboxChange}
+                   deleteTodo={deleteTodo}/>
+        </div>
+    )
+}
 export default TodoApp;
